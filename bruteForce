@@ -8,13 +8,13 @@ then
 rm $FILE;
 fi
 
-# verifica se tem dominios validos e adiciona do arquivo dominiosValidos.txt
+# verifica se tem dominios validos se tiver adiciona no arquivo dominiosValidos.txt
 for dnsNome in $(cat $1);
 do
 host -W=1 $dnsNome.$2 | —grep "has address" >> dominiosValidos.txt;
 done
 
-# adiciona o subdominio se existir
+# Exibe os subdominios
 if [ $FILE ] && [ -s $FILE ];
 then
 echo -e "\nDominios encontrados:\n";
