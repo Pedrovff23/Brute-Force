@@ -1,0 +1,26 @@
+#!/bin/bash
+
+FILE =./dominiosValidos.txt
+
+# verifica se já existe o arquivo dominiosValidos.txt. 
+if [ -d $FILE];
+then
+rm $FILE;
+fi
+
+# verifica se tem dominios validos e adiciona do arquivo dominiosValidos.txt
+for dnsNome in $(cat $1);
+do
+host -W=1 $dnsNome.$2 | —grep "has address" >> dominiosValidos.txt;
+done
+
+# adiciona o subdominio se existir
+if [ $FILE ] && [ -s $FILE ];
+then
+echo -e "\nDominios encontrados:\n";
+cat dominiosValidos.txt;
+else
+echo -e "\nNão foi encontrado subdominos validos";
+rm $FILE
+fi
+echo -e "\nProcesso Finalizado!\n";
